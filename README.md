@@ -15,3 +15,7 @@ Setelah dimodifikasi, method `handle_connection` tidak hanya membaca permintaan 
 **Request Validation & Response Selection**  
 Pada modifikasi ini, server membedakan respons berdasarkan permintaan yang diterima, tidak lagi memberikan hasil yang sama untuk semua URL. Dengan membaca baris pertama dari permintaan, server dapat mengetahui URL yang diminta dan memberikan respons yang sesuai. _Refactoring_ diterapkan untuk memperjelas proses pembacaan dan pemilihan respons sehingga lebih terstruktur dan memudahkan pengembangan.
 ![Commit 3 screen capture](assets/images/commit3.png)
+
+### Commit 4 Reflection Notes
+**Simulating Latency in a Single-Threaded Server**  
+Pada modifikasi ini, server dimodifikasi untuk memberikan respons lambat pada URL `/sleep` dengan menambahkan perintah `thread::sleep(Duration::from_secs(10))`. Hal ini membuat server berhenti selama 10 detik sebelum merespons. Karena server berjalan di _single thread_, jika ada pengguna lain yang mengakses server pada waktu bersamaan, permintaan lain harus menunggu hingga proses ini selesai sehingga akses menjadi lambat dan tidak responsif. Simulasi ini menunjukkan keterbatasan _single thread_ dalam menangani banyak permintaan sekaligus dan pentingnya _multi-threading_ agar server bisa lebih efisien melayani pengguna tanpa penundaan.
