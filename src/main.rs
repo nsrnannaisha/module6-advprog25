@@ -11,7 +11,7 @@ use hello::ThreadPool;
 fn main() {
     println!("Hello, world!");
     let listener = TcpListener::bind("127.0.0.1:7878").unwrap();
-    let pool = ThreadPool::new(4);
+    let pool = ThreadPool::build(4).unwrap();
 
     for stream in listener.incoming() {
         let stream = stream.unwrap();
