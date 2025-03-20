@@ -11,4 +11,7 @@ Method `handle_connection` berfungsi untuk menangani setiap permintaan yang diki
 Setelah dimodifikasi, method `handle_connection` tidak hanya membaca permintaan dari client, tetapi juga memberikan respons balik ke _client_ dalam bentuk halaman HTML. Setelah permintaan dibaca, fungsi ini menyusun respons HTTP dengan status "200 OK" dan membaca isi _file_ `hello.html`, lalu mengirimkan isi _file_ tersebut sebagai respons ke _client_ melalui koneksi. Dengan perubahan ini, fungsi `handle_connection` tidak hanya berperan mencatat permintaan, tetapi juga menyajikan tampilan yang diminta.
 ![Commit 2 screen capture](assets/images/commit2.png)
 
- 
+### Commit 3 Reflection Notes
+**Request Validation & Response Selection**  
+Pada modifikasi ini, server membedakan respons berdasarkan permintaan yang diterima, tidak lagi memberikan hasil yang sama untuk semua URL. Dengan membaca baris pertama dari permintaan, server dapat mengetahui URL yang diminta dan memberikan respons yang sesuai. _Refactoring_ diterapkan untuk memperjelas proses pembacaan dan pemilihan respons sehingga lebih terstruktur dan memudahkan pengembangan.
+![Commit 3 screen capture](assets/images/commit3.png)
