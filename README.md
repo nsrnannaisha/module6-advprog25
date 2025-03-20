@@ -19,3 +19,9 @@ Pada modifikasi ini, server membedakan respons berdasarkan permintaan yang diter
 ### Commit 4 Reflection Notes
 **Simulating Latency in a Single-Threaded Server**  
 Pada modifikasi ini, server dimodifikasi untuk memberikan respons lambat pada URL `/sleep` dengan menambahkan perintah `thread::sleep(Duration::from_secs(10))`. Hal ini membuat server berhenti selama 10 detik sebelum merespons. Karena server berjalan di _single thread_, jika ada pengguna lain yang mengakses server pada waktu bersamaan, permintaan lain harus menunggu hingga proses ini selesai sehingga akses menjadi lambat dan tidak responsif. Simulasi ini menunjukkan keterbatasan _single thread_ dalam menangani banyak permintaan sekaligus dan pentingnya _multi-threading_ agar server bisa lebih efisien melayani pengguna tanpa penundaan.
+
+### Commit 5 Reflection Notes
+**Multithreaded server using Threadpool**  
+Pada modifikasi ini, server ditingkatkan kemampuannya untuk memproses banyak permintaan sekaligus dengan menerapkan ThreadPool. Sebelumnya, karena server berjalan di single thread, satu permintaan lambat seperti akses ke `/sleep` bisa menyebabkan permintaan lain tertunda hingga proses tersebut selesai. Hal ini membuat server terasa lambat dan tidak tanggap.
+
+Dengan penggunaan ThreadPool, server menjalankan beberapa worker thread yang siap menerima dan memproses tugas secara paralel. Ketika ada permintaan masuk, tugas tersebut dikirim melalui channel ke salah satu worker, lalu diproses menggunakan fungsi `handle_connection`. Dengan cara ini, server dapat menangani beberapa permintaan secara bersamaan tanpa harus menunggu satu per satu sehingga kinerjanya lebih baik dalam melayani banyak pengguna, terutama saat permintaan memerlukan waktu proses yang lama.
